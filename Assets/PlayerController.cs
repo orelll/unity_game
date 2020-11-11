@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Rigidbody2D playerBody;
+    float horizontalMovement;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,10 +16,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+      CheckInput();
     }
 
-    void FixedUpdate(){
+    void CheckInput(){
+        horizontalMovement = Input.GetAxisRaw("Horizontal");
+    }
 
+    void FixedUpdate()
+    {
+        MovePlayer();
+    }
+
+    void MovePlayer(){
+        playerBody.velocity = new Vector2(horizontalMovement , playerBody.velocity.y);
     }
 }
