@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
     }
+    
 
     void MovePlayer(){
         playerBody.velocity = new Vector2(horizontalMovement , playerBody.velocity.y);
