@@ -5,8 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D playerBody;
-    public float playerSpeed = 1.75f;
-    public float jumpForce = 2.0f;
+    public LayerMask gorundLayer;
+    public Transform groundChecker;
+    
+    public float playerSpeed = 1;
+    public float jumpForce;
+
     bool jumpPressed;
     float horizontalMovement;
 
@@ -38,11 +42,16 @@ public class PlayerController : MonoBehaviour
         var playerPosition = horizontalMovement * playerSpeed * Time.deltaTime;
         var yMovement = playerBody.velocity.y;
 
-        if(jumpPressed)
+        if(jumpPressed && IsGrounded())
         {
             yMovement += jumpForce; // yMovement = yMovement + jumpForce;
         }
 
         playerBody.velocity = new Vector2(playerPosition , yMovement);
+    }
+
+    bool IsGrounded()
+    {
+        return true;
     }
 }
