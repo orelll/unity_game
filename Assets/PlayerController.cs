@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask gorundLayer;
     public Transform groundChecker;
     
-    public float playerSpeed = 1;
+    public float playerSpeed;
     public float jumpForce;
 
     bool jumpPressed;
@@ -17,8 +17,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("hello start");
-        playerSpeed = 1.5f;
+        playerSpeed = 90f;
     }
 
     // Update is called once per frame
@@ -39,14 +38,14 @@ public class PlayerController : MonoBehaviour
     
 
     void MovePlayer(){
-        var playerPosition = horizontalMovement * playerSpeed * Time.deltaTime;
         var yMovement = playerBody.velocity.y;
 
         if(jumpPressed && IsGrounded())
         {
-            yMovement += jumpForce; // yMovement = yMovement + jumpForce;
+            yMovement += jumpForce;
         }
 
+        var playerPosition = horizontalMovement * playerSpeed * Time.deltaTime;
         playerBody.velocity = new Vector2(playerPosition , yMovement);
     }
 
