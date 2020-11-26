@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D playerBody;
     public LayerMask gorundLayer;
     public Transform groundChecker;
-    
+
     public float playerSpeed;
     public float jumpForce;
 
@@ -23,34 +23,39 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      CheckInput();
+        CheckInput();
+        MovePlayer();
     }
 
-    void CheckInput(){
+    void CheckInput()
+    {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         jumpPressed = Input.GetKeyDown(KeyCode.Space);
     }
 
     void FixedUpdate()
     {
-        MovePlayer();
-    }
-    
 
-    void MovePlayer(){
+    }
+
+
+    void MovePlayer()
+    {
         var yMovement = playerBody.velocity.y;
 
-        if(jumpPressed && IsGrounded())
+        if (jumpPressed && IsGrounded())
         {
             yMovement += jumpForce;
         }
 
         var playerPosition = horizontalMovement * playerSpeed * Time.deltaTime;
-        playerBody.velocity = new Vector2(playerPosition , yMovement);
+        playerBody.velocity = new Vector2(playerPosition, yMovement);
     }
 
     bool IsGrounded()
     {
-        return true;
+        Collider2D collision = Physics2D.OverlapCircle(groundChecker.position, 0.5f, gorundLayer);
+
+        return collision != null;
     }
 }
