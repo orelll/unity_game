@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D playerBody;
     public LayerMask gorundLayer;
+    
     public Transform groundChecker;
 
     public float playerSpeed;
