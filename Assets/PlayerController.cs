@@ -1,23 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D playerBody;
     public LayerMask gorundLayer;
-    
+
     public Transform groundChecker;
 
     public float playerSpeed;
     public float jumpForce;
+    public float fallMultiplier;
+    public float lowJumpFallMultiplier;
 
     bool jumpPressed;
+    public bool enableShortJump = true;
     float horizontalMovement;
 
     // Start is called before the first frame update
     void Start()
     {
+        fallMultiplier = 2f;
         playerSpeed = 90f;
     }
 
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         CheckInput();
+        BetterFall();
         MovePlayer();
     }
 
@@ -33,12 +36,6 @@ public class PlayerController : MonoBehaviour
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         jumpPressed = Input.GetKeyDown(KeyCode.Space);
     }
-
-    void FixedUpdate()
-    {
-
-    }
-
 
     void MovePlayer()
     {
@@ -53,10 +50,21 @@ public class PlayerController : MonoBehaviour
         playerBody.velocity = new Vector2(playerPosition, yMovement);
     }
 
-    bool IsGrounded()
+    void BetterFall()
     {
-        Collider2D collision = Physics2D.OverlapCircle(groundChecker.position, 0.5f, gorundLayer);
-
-        return collision != null;
+        // czy nasz player spada?
+        if (playerBody.velocity.y < 0 && enableShortJump)
+        {
+            //fallMultiplier
+            playerBody.velocity += Vector2.up * Physics2D.gravity * fallMultiplier * Time.deltaTime;
+        }
+        // player leci do góry, ale spacja nie jest wciśnięta
+        else if (playerBody.velocity.y > 0 && !jumpPressed)
+        {
+            //lowJumpFallMultiplier
+        }
     }
+
+    bool IsGrounded() => Physics2D.OverlapCircle(groundChecker.position, 0.5f, gorundLayer) != null;
+
 }
