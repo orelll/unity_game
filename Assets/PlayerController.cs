@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
         // player leci do góry, ale spacja nie jest wciśnięta
         else if (playerBody.velocity.y > 0 && !jumpPressed)
         {
+            playerBody.velocity += Vector2.up * Physics2D.gravity * lowJumpFallMultiplier * Time.deltaTime;
             //lowJumpFallMultiplier
         }
     }
