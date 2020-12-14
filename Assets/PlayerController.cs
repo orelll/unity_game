@@ -3,8 +3,7 @@
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D playerBody;
-    public LayerMask gorundLayer;
-
+    public LayerMask groundLayer;
     public Transform groundChecker;
 
     public float playerSpeed;
@@ -19,8 +18,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fallMultiplier = 2f;
-        playerSpeed = 90f;
+        fallMultiplier = 5f;
+        playerSpeed = 250f;
     }
 
     // Update is called once per frame
@@ -65,7 +64,6 @@ public class PlayerController : MonoBehaviour
             //lowJumpFallMultiplier
         }
     }
-
-    bool IsGrounded() => Physics2D.OverlapCircle(groundChecker.position, 0.5f, gorundLayer) != null;
+    bool IsGrounded() => Physics2D.OverlapCircle(groundChecker.position, 0.5f, groundLayer) != null;
 
 }
