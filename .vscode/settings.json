@@ -1,4 +1,4 @@
-﻿{
+{
     "files.exclude":
     {
         "**/.DS_Store":true,
@@ -54,8 +54,20 @@
         "Temp/":true
     },
     "workbench.colorCustomizations": {
-        "activityBar.background": "#023519",
-        "titleBar.activeBackground": "#034B23",
-        "titleBar.activeForeground": "#EDFEF5"
-    }
+        "activityBar.background": "#f0db4d",
+        "titleBar.activeBackground": "#ecd21e",
+        "titleBar.activeForeground": "#15202b",
+        "activityBar.activeBackground": "#f0db4d",
+        "activityBar.activeBorder": "#0c9382",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#0c9382",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "statusBar.background": "#ecd21e",
+        "statusBar.foreground": "#15202b",
+        "statusBarItem.hoverBackground": "#c6af11",
+        "titleBar.inactiveBackground": "#ecd21e99",
+        "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#ecd21e"
 }

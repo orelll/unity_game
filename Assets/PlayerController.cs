@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public Transform groundChecker;
 
     public float playerSpeed;
+    public float verticalPlayerSpeed = 5;
     public float jumpForce;
     public float fallMultiplier;
     public float lowJumpFallMultiplier;
