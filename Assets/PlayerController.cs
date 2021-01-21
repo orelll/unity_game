@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D playerBody;
     public LayerMask gorundLayer;
-
+    public Animator animator;
     public Transform groundChecker;
 
     public float playerSpeed;
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
             yMovement += jumpForce;
         }
 
+        animator.SetFloat("Speed", Math.Abs(horizontalMovement));
         var playerPosition = horizontalMovement * playerSpeed * Time.deltaTime;
         playerBody.velocity = new Vector2(playerPosition, yMovement);
     }

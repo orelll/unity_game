@@ -2564,6 +2564,7 @@ MonoBehaviour:
   gorundLayer:
     serializedVersion: 2
     m_Bits: 256
+  animator: {fileID: 2120324623}
   groundChecker: {fileID: 734772411}
   playerSpeed: 250
   jumpForce: 6
