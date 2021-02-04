@@ -13,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - MyGround
-  - 
-  - 
+  - Player
+  - Ground
+  - Ladders
   - 
   - 
   - 
@@ -41,6 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
+  - name: 
     uniqueID: 3187039685
     locked: 0
