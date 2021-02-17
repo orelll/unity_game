@@ -25,15 +25,26 @@ public class LaddersDriver : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 other.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, script.verticalPlayerSpeed);
+                script.IsClimbing(true);
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 other.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, -script.verticalPlayerSpeed);
+                script.IsClimbing(true);
             }
             else
             {
                 other.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, 0);
             }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            var script = other.GetComponentInParent<PlayerController>();
+            script.IsClimbing(false);
         }
     }
 }

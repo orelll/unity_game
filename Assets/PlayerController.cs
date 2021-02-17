@@ -5,7 +5,6 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D playerBody;
     public LayerMask gorundLayer;
-    public Animator animator;
     public Transform groundChecker;
 
     public float playerSpeed;
@@ -13,17 +12,22 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float fallMultiplier;
     public float lowJumpFallMultiplier;
-    public float groundCheckRange = 0.5f;
+    public float groundCheckRange = 0.1f;
 
     bool jumpPressed;
     public bool enableShortJump = true;
     float horizontalMovement;
+
+    private Animator _animator;
+    private SpriteRenderer _renderer;
 
     // Start is called before the first frame update
     void Start()
     {
         fallMultiplier = 2f;
         playerSpeed = 90f;
+        _renderer = GetComponentInParent<SpriteRenderer>();
+        _animator = GetComponentInParent<Animator>();
     }
 
     // Update is called once per frame
@@ -38,21 +42,31 @@ public class PlayerController : MonoBehaviour
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         jumpPressed = Input.GetKeyDown(KeyCode.Space);
+        SetAnimation();
     }
 
     void MovePlayer()
     {
         var yMovement = playerBody.velocity.y;
 
-        if (jumpPressed && IsGrounded())
+        if (jumpPressed)
         {
-            yMovement += jumpForce;
+            if (IsGrounded())
+            {
+                yMovement += jumpForce;
+                 _animator.SetBool("jumping", false);
+            }
+
+            else
+                _animator.SetBool("jumping", true);
         }
 
-        animator.SetFloat("Speed", Math.Abs(horizontalMovement));
+        _animator.SetFloat("vertical_speed", yMovement);
+        _animator.SetFloat("Speed", Math.Abs(horizontalMovement));
         var playerPosition = horizontalMovement * playerSpeed * Time.deltaTime;
         playerBody.velocity = new Vector2(playerPosition, yMovement);
     }
+    public void IsClimbing(bool isClimbing) => _animator.SetBool("climbing", isClimbing);
 
     void BetterFall()
     {
@@ -70,6 +84,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    bool IsGrounded() => Physics2D.OverlapCircle(groundChecker.position, groundCheckRange, gorundLayer) != null;
-
+    private void SetAnimation()
+    {
+        _renderer.flipX = horizontalMovement < 0;
+        _animator.SetFloat("horizontalSpeed", Math.Abs(horizontalMovement));
+    }
+    private bool IsGrounded() => Physics2D.OverlapCircle(groundChecker.position, groundCheckRange, gorundLayer) != null;
 }

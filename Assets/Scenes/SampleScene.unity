@@ -2960,14 +2960,13 @@ MonoBehaviour:
   gorundLayer:
     serializedVersion: 2
     m_Bits: 1536
-  animator: {fileID: 2120324623}
   groundChecker: {fileID: 734772411}
   playerSpeed: 250
-  verticalPlayerSpeed: 0
+  verticalPlayerSpeed: 2
   jumpForce: 6
-  fallMultiplier: 2
-  lowJumpFallMultiplier: 1.5
-  groundCheckRange: 0.5
+  fallMultiplier: 1.1
+  lowJumpFallMultiplier: 1.2
+  groundCheckRange: 0.1
   enableShortJump: 1
 --- !u!95 &2120324623
 Animator:

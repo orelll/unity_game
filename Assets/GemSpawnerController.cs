@@ -21,9 +21,20 @@ public class GemSpawnerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_gemsList.Count < 3)
+        if (_gemsList.Count < 3)
         {
             SpawnGem();
+        }
+    }
+
+    public void DeleteGem(GameObject gem)
+    {
+        Debug.Log($"Removing gem {gem.GetInstanceID()}\r\n");
+
+        if (_gemsList.Contains(gem))
+        {
+            _gemsList.Remove(gem);
+            Destroy(gem);
         }
     }
 
