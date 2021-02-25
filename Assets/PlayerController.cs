@@ -24,8 +24,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fallMultiplier = 2f;
-        playerSpeed = 90f;
+        fallMultiplier = 1.2f;
+        lowJumpFallMultiplier = 1.1f;
+        playerSpeed = 150f;
         _renderer = GetComponentInParent<SpriteRenderer>();
         _animator = GetComponentInParent<Animator>();
     }
@@ -45,28 +46,44 @@ public class PlayerController : MonoBehaviour
         SetAnimation();
     }
 
+    bool groundedMemory = true;
     void MovePlayer()
     {
         var yMovement = playerBody.velocity.y;
 
+
+
         if (jumpPressed)
         {
-            if (IsGrounded())
-            {
-                yMovement += jumpForce;
-                 _animator.SetBool("jumping", false);
-            }
+            Debug.Log("jump pressed!");
+            yMovement += jumpForce;
 
-            else
+            // if (!IsGrounded())
+            {
                 _animator.SetBool("jumping", true);
+                Debug.Log("Setting jumping to true");
+            }
         }
 
+        if (!groundedMemory && IsGrounded())
+        {
+            _animator.SetBool("jumping", false);
+            Debug.Log("Setting jumping to false");
+        }
+        _animator.SetBool("grounded", IsGrounded());
+
         _animator.SetFloat("vertical_speed", yMovement);
-        _animator.SetFloat("Speed", Math.Abs(horizontalMovement));
+        _animator.SetFloat("speed", Math.Abs(horizontalMovement));
         var playerPosition = horizontalMovement * playerSpeed * Time.deltaTime;
         playerBody.velocity = new Vector2(playerPosition, yMovement);
+        groundedMemory = IsGrounded();
     }
-    public void IsClimbing(bool isClimbing) => _animator.SetBool("climbing", isClimbing);
+    public void IsClimbing(bool isClimbing)
+    {
+        _animator.SetBool("climbing", isClimbing);
+        Debug.Log($"setting climbing flag to {isClimbing}");
+    }
+
 
     void BetterFall()
     {
@@ -87,7 +104,7 @@ public class PlayerController : MonoBehaviour
     private void SetAnimation()
     {
         _renderer.flipX = horizontalMovement < 0;
-        _animator.SetFloat("horizontalSpeed", Math.Abs(horizontalMovement));
+        _animator.SetFloat("speed", Math.Abs(horizontalMovement));
     }
     private bool IsGrounded() => Physics2D.OverlapCircle(groundChecker.position, groundCheckRange, gorundLayer) != null;
 }

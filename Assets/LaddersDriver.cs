@@ -2,6 +2,9 @@
 
 public class LaddersDriver : MonoBehaviour
 {
+
+    private readonly string _playerName = "Player";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +20,7 @@ public class LaddersDriver : MonoBehaviour
     void OnTriggerStay2D(Collider2D other)
     {
 
-        if (other.name == "Player")
+        if (IsPlayer(other))
         {
             var script = other.GetComponentInParent<PlayerController>();
             var vel = other.GetComponent<Rigidbody2D>().velocity;
@@ -41,10 +44,12 @@ public class LaddersDriver : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (IsPlayer(other))
         {
             var script = other.GetComponentInParent<PlayerController>();
             script.IsClimbing(false);
         }
     }
+
+    private bool IsPlayer(Collider2D other) => other.name == _playerName;
 }
