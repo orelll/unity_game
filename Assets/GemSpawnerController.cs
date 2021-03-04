@@ -6,7 +6,9 @@ public class GemSpawnerController : MonoBehaviour
 {
     public GameObject GemPrefab;
     public GameObject SpawnArea;
+    public GameObject CounterControl;
 
+    private GemCounterController _counterController;
     private List<GameObject> _gemsList;
     private Bounds _bounds;
 
@@ -16,6 +18,7 @@ public class GemSpawnerController : MonoBehaviour
         _bounds = collider.bounds;
 
         _gemsList = new List<GameObject>();
+        _counterController = CounterControl.GetComponentInChildren<GemCounterController>();
     }
 
     // Update is called once per frame
@@ -35,6 +38,7 @@ public class GemSpawnerController : MonoBehaviour
         {
             _gemsList.Remove(gem);
             Destroy(gem);
+            _counterController.Add();
         }
     }
 
