@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D playerBody;
     public LayerMask gorundLayer;
     public Transform groundChecker;
+    public GameObject HealthBar;
+    private SliderController _healthBarController;
 
     public float playerSpeed;
     public float verticalPlayerSpeed = 5;
@@ -29,6 +31,9 @@ public class PlayerController : MonoBehaviour
         playerSpeed = 150f;
         _renderer = GetComponentInParent<SpriteRenderer>();
         _animator = GetComponentInParent<Animator>();
+        _healthBarController = HealthBar.GetComponent<SliderController>();
+
+        _healthBarController.Set(30);
     }
 
     // Update is called once per frame
