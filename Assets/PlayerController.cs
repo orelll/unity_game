@@ -4,7 +4,7 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D playerBody;
-    public LayerMask gorundLayer;
+    public LayerMask groundLayer;
     public Transform groundChecker;
     public GameObject HealthBar;
     private SliderController _healthBarController;
@@ -15,14 +15,15 @@ public class PlayerController : MonoBehaviour
     public float fallMultiplier;
     public float lowJumpFallMultiplier;
     public float groundCheckRange = 0.1f;
-
+    public int Health;
+    public bool IsHurt;
     bool jumpPressed;
     public bool enableShortJump = true;
     float horizontalMovement;
 
     private Animator _animator;
     private SpriteRenderer _renderer;
-
+    private bool groundedMemory = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +32,11 @@ public class PlayerController : MonoBehaviour
         playerSpeed = 150f;
         _renderer = GetComponentInParent<SpriteRenderer>();
         _animator = GetComponentInParent<Animator>();
-        _healthBarController = HealthBar.GetComponent<SliderController>();
 
-        _healthBarController.Set(30);
+        Health = 100;
+        IsHurt = false;
+        _healthBarController = HealthBar.GetComponent<SliderController>();
+        _healthBarController.Set(Health);
     }
 
     // Update is called once per frame
@@ -51,23 +54,27 @@ public class PlayerController : MonoBehaviour
         SetAnimation();
     }
 
-    bool groundedMemory = true;
+    public void GotHit(int damage){
+        Health -= Math.Abs(damage);
+        IsHurt = true;
+        _healthBarController.Set(Health);
+        _animator.SetBool("hurt", true);
+    }
+
+
+
     void MovePlayer()
     {
         var yMovement = playerBody.velocity.y;
-
-
 
         if (jumpPressed)
         {
             Debug.Log("jump pressed!");
             yMovement += jumpForce;
 
-            // if (!IsGrounded())
-            {
                 _animator.SetBool("jumping", true);
                 Debug.Log("Setting jumping to true");
-            }
+        
         }
 
         if (!groundedMemory && IsGrounded())
@@ -105,11 +112,19 @@ public class PlayerController : MonoBehaviour
             //lowJumpFallMultiplier
         }
     }
-
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if(col.gameObject.name == "Frog"){
+            IsHurt = false;
+            _animator.SetBool("hurt", false);
+        }
+    }
     private void SetAnimation()
     {
         _renderer.flipX = horizontalMovement < 0;
         _animator.SetFloat("speed", Math.Abs(horizontalMovement));
     }
-    private bool IsGrounded() => Physics2D.OverlapCircle(groundChecker.position, groundCheckRange, gorundLayer) != null;
+    private bool IsGrounded() => Physics2D.OverlapCircle(groundChecker.position, groundCheckRange, groundLayer) != null;
+
+
 }

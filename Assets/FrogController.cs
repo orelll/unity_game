@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
+using UnityEngine.UI;
 
 public class FrogController : MonoBehaviour
 {
     public GameObject Player;
-
-    // JumpInterval
-    // JumpForce
-    // JumpXSpeed
     public float JumpMaxInterval;
     public float JumpMinInterval;
     public float JumpForce;
     public float JumpXSpeed;
+    public float XThreshold;
 
     private float _currentInterval;
 
@@ -28,6 +25,7 @@ public class FrogController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        XThreshold = 0.05f;
         _direction = 1;
         JumpForce = 4.5f;
         JumpXSpeed = 3.5f;
@@ -35,7 +33,7 @@ public class FrogController : MonoBehaviour
         JumpMinInterval = 1;
         _grounded = true;
 
-        _currentInterval = Random.Range(JumpMaxInterval, JumpMinInterval);
+        _currentInterval = UnityEngine.Random.Range(JumpMaxInterval, JumpMinInterval);
 
         _playerTransform = Player.GetComponent<Transform>();
         _frogTransform = GetComponent<Transform>();
@@ -55,7 +53,7 @@ public class FrogController : MonoBehaviour
         {
             Debug.Log("Ready to jump!");
             Jump();
-            _currentInterval = Random.Range(JumpMinInterval, JumpMaxInterval);
+            _currentInterval = UnityEngine.Random.Range(JumpMinInterval, JumpMaxInterval);
         }
         else if (_frogRigidbody.velocity.y < 0)
         {
@@ -64,6 +62,39 @@ public class FrogController : MonoBehaviour
         }
     }
 
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.name == "Tilemap")
+        {
+            _frogAnimator.SetBool("jump", false);
+            _frogAnimator.SetBool("fall", false);
+        }
+        else if (col.gameObject.name == "Player")
+        {
+            if (IsAttackFromAbove(col.rigidbody))
+            {
+                Debug.Log("I am attacked from above!");
+            }
+            else
+            {
+                var playerController = col.gameObject.GetComponent<PlayerController>();
+                playerController.GotHit(15);
+            }
+        }
+    }
+
+    private bool IsAttackFromAbove(Rigidbody2D col)
+    {
+        // porównać środek żaby (pozycja Y) ze środkiem kolidera (też pozycja Y)
+        var yIsOk = _frogRigidbody.position.y < col.position.y;
+        var xDistance = Math.Abs(_frogRigidbody.position.x - col.position.x);
+        var xIsOk = xDistance <= XThreshold;
+
+        return yIsOk && xIsOk;
+    }
+
+    
     private void Jump()
     {
         _frogAnimator.SetBool("jump", true);
@@ -89,15 +120,6 @@ public class FrogController : MonoBehaviour
         else
         {
             _direction = 1;
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.name == "Tilemap")
-        {
-            _frogAnimator.SetBool("jump", false);
-            _frogAnimator.SetBool("fall", false);
         }
     }
 }
