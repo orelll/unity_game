@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System;
+using System.Linq;
 using UnityEngine.UI;
 
 public class FrogController : MonoBehaviour
 {
-    public GameObject Player;
     public float JumpMaxInterval;
     public float JumpMinInterval;
     public float JumpForce;
@@ -35,7 +35,11 @@ public class FrogController : MonoBehaviour
 
         _currentInterval = UnityEngine.Random.Range(JumpMaxInterval, JumpMinInterval);
 
-        _playerTransform = Player.GetComponent<Transform>();
+        var frogSpawner = GetComponentInParent<GameObject>();
+        var sceneGameObjects = frogSpawner.GetComponentsInParent<GameObject>();
+        var player = sceneGameObjects.ToList().Where(x => x.name == "Player").FirstOrDefault();
+
+        _playerTransform = player.GetComponent<Transform>();
         _frogTransform = GetComponent<Transform>();
         _frogRenderer = GetComponent<SpriteRenderer>();
         _frogRigidbody = GetComponent<Rigidbody2D>();
