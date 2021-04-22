@@ -48,6 +48,10 @@ public class FrogController : MonoBehaviour
         DetermineDirection();
         SetAnimationDirection();
 
+        if(_frogAnimator.GetBool("dead")){
+            _frogRigidbody.velocity = new Vector2(0,0);
+        }
+
         _currentInterval -= Time.deltaTime;
         if (_currentInterval <= 0.01f)
         {
@@ -94,7 +98,7 @@ public class FrogController : MonoBehaviour
         return yIsOk && xIsOk;
     }
 
-    
+
     private void Jump()
     {
         _frogAnimator.SetBool("jump", true);
@@ -121,5 +125,11 @@ public class FrogController : MonoBehaviour
         {
             _direction = 1;
         }
+    }
+
+    public void BeDead()
+    {
+        Debug.Log("Death is coming!");
+        Destroy(this.gameObject);
     }
 }
