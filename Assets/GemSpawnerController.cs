@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GemSpawnerController : MonoBehaviour
 {
@@ -44,8 +45,10 @@ public class GemSpawnerController : MonoBehaviour
 
     public void SpawnGem()
     {
-        var newX = Random.Range(_bounds.min.x, _bounds.max.x);
-        var newY = Random.Range(_bounds.min.y, _bounds.max.y);
+        var newPosition = GetRandomPosition();
+        while(){
+
+        }
 
         var newPosition = new Vector3(newX, newY, _bounds.min.z);
 
@@ -56,4 +59,14 @@ public class GemSpawnerController : MonoBehaviour
         newGem.transform.parent = SpawnArea.transform;
         _gemsList.Add(newGem);
     }
+
+    private Tuple<float, float> GetRandomPosition()
+    {
+        var newX = UnityEngine.Random.Range(_bounds.min.x, _bounds.max.x);
+        var newY = UnityEngine.Random.Range(_bounds.min.y, _bounds.max.y);
+
+        return new Tuple<float, float>(newX, newY);
+    }
+
+    private float CalculateDistance(float x, float y) => Math.Sqrt(Math.Pow())
 }
