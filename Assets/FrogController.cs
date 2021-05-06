@@ -34,16 +34,15 @@ public class FrogController : MonoBehaviour
         _grounded = true;
 
         _currentInterval = UnityEngine.Random.Range(JumpMaxInterval, JumpMinInterval);
-
-        var frogSpawner = GetComponentInParent<GameObject>();
-        var sceneGameObjects = frogSpawner.GetComponentsInParent<GameObject>();
-        var player = sceneGameObjects.ToList().Where(x => x.name == "Player").FirstOrDefault();
-
-        _playerTransform = player.GetComponent<Transform>();
         _frogTransform = GetComponent<Transform>();
         _frogRenderer = GetComponent<SpriteRenderer>();
         _frogRigidbody = GetComponent<Rigidbody2D>();
         _frogAnimator = GetComponent<Animator>();
+
+        var frogArea = this.transform.parent;
+        var spawnerController = frogArea.GetComponent<FrogAreaController>();
+        var player = spawnerController.PlayerReference;
+        _playerTransform = player.GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -52,8 +51,9 @@ public class FrogController : MonoBehaviour
         DetermineDirection();
         SetAnimationDirection();
 
-        if(_frogAnimator.GetBool("dead")){
-            _frogRigidbody.velocity = new Vector2(0,0);
+        if (_frogAnimator.GetBool("dead"))
+        {
+            _frogRigidbody.velocity = new Vector2(0, 0);
         }
 
         _currentInterval -= Time.deltaTime;
@@ -68,6 +68,8 @@ public class FrogController : MonoBehaviour
             _frogAnimator.SetBool("jump", false);
             _frogAnimator.SetBool("fall", true);
         }
+
+
     }
 
 
@@ -75,8 +77,8 @@ public class FrogController : MonoBehaviour
     {
         if (col.gameObject.name == "Tilemap")
         {
-            _frogAnimator.SetBool("jump", false);
-            _frogAnimator.SetBool("fall", false);
+            // _frogAnimator.SetBool("jump", false);
+            // _frogAnimator.SetBool("fall", false);
         }
         else if (col.gameObject.name == "Player")
         {

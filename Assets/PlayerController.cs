@@ -54,7 +54,8 @@ public class PlayerController : MonoBehaviour
         SetAnimation();
     }
 
-    public void GotHit(int damage){
+    public void GotHit(int damage)
+    {
         Health -= Math.Abs(damage);
         IsHurt = true;
         _healthBarController.Set(Health);
@@ -66,29 +67,31 @@ public class PlayerController : MonoBehaviour
     void MovePlayer()
     {
         var yMovement = playerBody.velocity.y;
+        var grounded = IsGrounded();
 
-        if (jumpPressed)
+        if (jumpPressed && grounded)
         {
             Debug.Log("jump pressed!");
             yMovement += jumpForce;
 
-                _animator.SetBool("jumping", true);
-                Debug.Log("Setting jumping to true");
-        
+            _animator.SetBool("jumping", true);
+            Debug.Log("Setting jumping to true");
         }
 
-        if (!groundedMemory && IsGrounded())
+        if (!groundedMemory && grounded)
         {
             _animator.SetBool("jumping", false);
             Debug.Log("Setting jumping to false");
         }
-        _animator.SetBool("grounded", IsGrounded());
+
+        _animator.SetBool("grounded", grounded);
 
         _animator.SetFloat("vertical_speed", yMovement);
         _animator.SetFloat("speed", Math.Abs(horizontalMovement));
         var playerPosition = horizontalMovement * playerSpeed * Time.deltaTime;
         playerBody.velocity = new Vector2(playerPosition, yMovement);
-        groundedMemory = IsGrounded();
+
+        groundedMemory = grounded;
     }
     public void IsClimbing(bool isClimbing)
     {
@@ -114,7 +117,8 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D col)
     {
-        if(col.gameObject.name == "Frog"){
+        if (col.gameObject.name.Contains("Frog"))
+        {
             IsHurt = false;
             _animator.SetBool("hurt", false);
         }

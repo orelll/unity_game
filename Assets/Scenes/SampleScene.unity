@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb658d980f9e8f42bdff6e6c0270a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerReference: {fileID: 2120324617}
   FrogPrefab: {fileID: 1571655526206090412, guid: 9b972d47dc8a1fa4380d383adb4fd91d,
     type: 3}
   SpawnArea: {fileID: 138941137}
@@ -799,7 +800,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734772410}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.22, y: -1.58, z: 0}
+  m_LocalPosition: {x: -0.18, y: -1.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2120324619}
@@ -3915,7 +3916,7 @@ MonoBehaviour:
   playerBody: {fileID: 2120324621}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1536
   groundChecker: {fileID: 734772411}
   HealthBar: {fileID: 1466784816}
   playerSpeed: 250

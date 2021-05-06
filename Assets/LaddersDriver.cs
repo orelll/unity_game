@@ -37,6 +37,7 @@ public class LaddersDriver : MonoBehaviour
             }
             else
             {
+                // script.IsClimbing(false);
                 other.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, 0);
             }
         }

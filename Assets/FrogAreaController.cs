@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class FrogAreaController : MonoBehaviour
 {
-
+    public GameObject PlayerReference;
     public GameObject FrogPrefab;
     public GameObject SpawnArea;
     private PolygonCollider2D _spawnerCollider;
