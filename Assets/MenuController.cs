@@ -5,18 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
+    public GameObject FrontMenu;
+    public GameObject ConfirmationMenu;
+
+    private string _playGameScene = "PlayGameScene";
+
+
     //Play Game
     public void PlayGame(){
         Debug.Log("Starting game");
-        var currentIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentIndex + 1);
+       
+        SceneManager.LoadScene(_playGameScene);
     }
-
-    //Settings
-
-    //Exit
     public void MoveToExit(){
-        
+        FrontMenu.SetActive(false);
+        ConfirmationMenu.SetActive(true);
+    }   
+    
+    public void CancelExit(){
+        FrontMenu.SetActive(true);
+        ConfirmationMenu.SetActive(false);
+    }     
+    
+    public void ConfirmExit(){
+        Debug.Log("closing!");
+        Application.Quit();
     }
 
 }

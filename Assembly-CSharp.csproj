@@ -42,7 +42,10 @@
      <Compile Include="Assets\GemCounterController.cs" />
      <Compile Include="Assets\GemSpawnerController.cs" />
      <Compile Include="Assets\LaddersDriver.cs" />
+     <Compile Include="Assets\Level1MenuController.cs" />
+     <Compile Include="Assets\MenuBoxController.cs" />
      <Compile Include="Assets\MenuController.cs" />
+     <Compile Include="Assets\PlayGameController.cs" />
      <Compile Include="Assets\PlayerController.cs" />
      <Compile Include="Assets\SliderController.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
