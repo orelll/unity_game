@@ -36,6 +36,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\DTOs\GameStateDTO.cs" />
+     <Compile Include="Assets\DTOs\PointDTO.cs" />
      <Compile Include="Assets\FrogAreaController.cs" />
      <Compile Include="Assets\FrogController.cs" />
      <Compile Include="Assets\GemController.cs" />

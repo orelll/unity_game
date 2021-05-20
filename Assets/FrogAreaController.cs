@@ -6,14 +6,14 @@ public class FrogAreaController : MonoBehaviour
     public GameObject PlayerReference;
     public GameObject FrogPrefab;
     public GameObject SpawnArea;
+    public List<GameObject> FrogsList;
     private PolygonCollider2D _spawnerCollider;
-    private List<GameObject> _frogsList;
 
     private Bounds _bounds;
     // Start is called before the first frame update
     void Start()
     {
-        _frogsList = new List<GameObject>();
+        FrogsList = new List<GameObject>();
         _spawnerCollider = GetComponent<PolygonCollider2D>();
         _bounds = _spawnerCollider.bounds;
         SpawnGem();
@@ -37,6 +37,6 @@ public class FrogAreaController : MonoBehaviour
 
         //przypisać gem do GemSpawnera
         newGem.transform.parent = SpawnArea.transform;
-        _frogsList.Add(newGem);
+        FrogsList.Add(newGem);
     }
 }

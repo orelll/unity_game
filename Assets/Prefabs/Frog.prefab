@@ -153,9 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67fcf33e73dbf5428ca80cd078019b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  JumpMaxInterval: 0
-  JumpMinInterval: 0
-  JumpForce: 0
-  JumpXSpeed: 0
-  XThreshold: 0
+  JumpMaxInterval: 2
+  JumpMinInterval: 1
+  JumpForce: 2
+  JumpXSpeed: 3
+  XThreshold: 1
