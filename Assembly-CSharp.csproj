@@ -40,6 +40,7 @@
      <Compile Include="Assets\DTOs\PointDTO.cs" />
      <Compile Include="Assets\FrogAreaController.cs" />
      <Compile Include="Assets\FrogController.cs" />
+     <Compile Include="Assets\GameController.cs" />
      <Compile Include="Assets\GemController.cs" />
      <Compile Include="Assets\GemCounterController.cs" />
      <Compile Include="Assets\GemSpawnerController.cs" />

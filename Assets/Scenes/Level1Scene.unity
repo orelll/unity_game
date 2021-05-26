@@ -680,6 +680,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353919529}
   m_CullTransparentMesh: 0
+--- !u!1 &396893120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 396893122}
+  - component: {fileID: 396893121}
+  m_Layer: 0
+  m_Name: GameControllerBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &396893121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396893120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892727567f3ed38419466a822c0e369a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerGameObject: {fileID: 0}
+  GemSpawnerGameObject: {fileID: 0}
+  FrogSpawnerGameObject: {fileID: 0}
+--- !u!4 &396893122
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396893120}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.403442, y: 0.5945722, z: -6214.9253}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &409670699
 GameObject:
   m_ObjectHideFlags: 0
@@ -4918,9 +4964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MenuGameObject: {fileID: 852316188}
-  PlayerGameObject: {fileID: 0}
-  GemSpawnerGameObject: {fileID: 0}
-  FrogSpawnerGameObject: {fileID: 0}
+  GameControllerGameObject: {fileID: 0}
 --- !u!4 &1720394668
 Transform:
   m_ObjectHideFlags: 0
