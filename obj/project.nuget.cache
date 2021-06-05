@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ep1a3n1npk+SVc1cl5KLcWZ8VFEEPYwYDmNNd7kJs74g/yHh2anVUiFDsn1HiX1u03Ct32IdpmmIjJb056Kbdw==",
+  "success": true,
+  "projectFilePath": "C:\\Repos\\Szymon\\lekcja_6\\unity_game-master\\Assembly-CSharp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\orlik\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

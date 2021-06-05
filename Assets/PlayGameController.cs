@@ -2,7 +2,9 @@
 using UnityEngine.SceneManagement;
 
 public class PlayGameController : MonoBehaviour
-{   private int _mainMenuAddress = 0;
+{
+    public static bool LoadGameState = false;
+    private int _mainMenuAddress = 0;
     private string _level1Scene = "Level1Scene";
 
     public void StartNewGame()
@@ -12,6 +14,7 @@ public class PlayGameController : MonoBehaviour
 
     public void ContinueGame()
     {
+        LoadGameState = true;
         SceneManager.LoadScene(_level1Scene);
     }
 

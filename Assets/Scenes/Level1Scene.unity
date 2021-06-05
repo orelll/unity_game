@@ -709,9 +709,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892727567f3ed38419466a822c0e369a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerGameObject: {fileID: 0}
-  GemSpawnerGameObject: {fileID: 0}
-  FrogSpawnerGameObject: {fileID: 0}
+  PlayerGameObject: {fileID: 2120324617}
+  GemSpawnerGameObject: {fileID: 1860538480}
+  FrogSpawnerGameObject: {fileID: 138941137}
 --- !u!4 &396893122
 Transform:
   m_ObjectHideFlags: 0
@@ -4964,7 +4964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MenuGameObject: {fileID: 852316188}
-  GameControllerGameObject: {fileID: 0}
+  GameControllerGameObject: {fileID: 396893120}
 --- !u!4 &1720394668
 Transform:
   m_ObjectHideFlags: 0
